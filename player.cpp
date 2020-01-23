@@ -51,7 +51,7 @@ bool Player::check_hand(int rank, int suit) {
 
 int Player::ask_suit() {
     string suit = "";
-    while(suit != "1" || suit != "2" || suit != "3" || suit != "4") {
+    while(suit != "1" && suit != "2" && suit != "3" && suit != "4") {
         cout << "Which suit do you want the computer to place? Club - 1, Diamond - 2, Hearts - 3, Spades - 4: ";
         getline(cin, suit);
     }

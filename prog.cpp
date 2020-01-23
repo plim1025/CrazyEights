@@ -10,8 +10,11 @@
 using namespace std;
 
 int main() {
-
-
+    Card cards[5];
+    cards[0].set_suit(1);
+    Hand hand = Hand(cards, 5);
+    Player player = Player(hand, "player");
+    int suit = player.ask_suit();
 
 
     return 0;
