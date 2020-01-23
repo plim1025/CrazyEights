@@ -15,11 +15,11 @@ class Deck {
     Deck();
     Deck(Card init_cards[DECK_SIZE]);
     ~Deck();
-    Card* get_deck();
+    Card* get_cards();
     int get_n_cards();
-    void set_deck(Card *new_cards);
+    void set_cards(Card *new_cards);
     void set_n_cards(int n_cards);
-    void print_deck();
+    void print_cards();
     void deal_card(Hand hand);
 };
 

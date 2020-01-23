@@ -20,7 +20,7 @@ Deck::Deck(Card init_cards[DECK_SIZE]) {
 
 Deck::~Deck() {}
 
-Card* Deck::get_deck() {
+Card* Deck::get_cards() {
     return cards;
 }
 
@@ -28,7 +28,7 @@ int Deck::get_n_cards() {
     return n_cards;
 }
 
-void Deck::set_deck(Card* new_cards) {
+void Deck::set_cards(Card* new_cards) {
     for(int i = 0; i < DECK_SIZE; i++)
         cards[i] = new_cards[i];
 }
@@ -37,15 +37,23 @@ void Deck::set_n_cards(int new_n_cards) {
     n_cards = new_n_cards;
 }
 
-void Deck::print_deck() {
+void Deck::print_cards() {
     for(int i = 0; i < DECK_SIZE; i++)
         cout << cards[i].get_rank() << " " << cards[i].get_suit() << endl;
 }
 
 void Deck::deal_card(Hand hand) {
+    int card_index = 0;
+    // Find first non-empty card
+    for(int i = 0; i < DECK_SIZE; i++) {
+        if(cards[i].is_valid_card()) {
+            card_index = i;
+            break;
+        }
+    }
     // Add card to given hand
-    hand.add_card(cards[0]);
+    hand.add_card(cards[card_index]);
     // Take first card off deck
-    cards[0].reset_card();
+    cards[card_index].reset_card();
     n_cards--;
 }
