@@ -15,10 +15,10 @@ Player::Player(const Hand &init_hand, string init_name) {
 }
 
 Player::~Player() {
-    cout << "Player destroyed" << endl;
+    // cout << "Player destroyed" << endl;
 };
 
-Hand Player::get_hand() {
+Hand& Player::get_hand() {
     return hand;
 }
 

@@ -17,7 +17,8 @@ Hand::Hand(Card *&init_cards, int init_n_cards) {
 }
 
 Hand::~Hand() {
-    cout << "Hand destroyed" << endl;
+    // cout << "Hand destroyed" << endl;
+    delete [] cards;
 }
 
 Card* Hand::get_cards() {
@@ -98,5 +99,5 @@ int Hand::get_rank(int index) {
 void Hand::print_hand() {
     cout << "Number of cards: " << n_cards << endl;
     for(int i = 0; i < n_cards; i++)
-        cout << "Rank: " << cards[i].get_rank() << "\t" << "Suit: " << cards[i].get_suit() << endl;
+        cout << "(" << i << ") " << "Rank: " << cards[i].get_rank() << " " << "Suit: " << cards[i].get_suit() << endl;
 }

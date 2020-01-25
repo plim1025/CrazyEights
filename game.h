@@ -8,11 +8,12 @@ class Game {
     Deck cards;
     Card faceup_card;
     Player players[2];
+    int player_turn;
   public:
     Game();
     Game(const Deck &init_cards, const Player (&init_players)[2]);
     ~Game();
-    Deck get_cards();
+    Deck& get_cards();
     Player* get_players();
     Card get_faceup_card();
     void set_cards(const Deck &new_cards);
@@ -21,6 +22,7 @@ class Game {
     bool check_game_status();
     void print_game_status();
     void flip_top_card();
+    void deal_cards();
 };
 
 #endif

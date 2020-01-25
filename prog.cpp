@@ -10,12 +10,9 @@
 using namespace std;
 
 int main() {
-    Deck deck = Deck();
-    deck.fill_cards();
-    deck.shuffle_cards();
-    Player players[2] = {Player(Hand(), "Human"), Player(Hand(), "Computer")};
-    Game game = Game(deck, players);
-    game.flip_top_card();
+    Game game = Game();
+    game.deal_cards();
+    // game.start_turn();
     game.print_game_status();
 
     return 0;

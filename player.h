@@ -14,7 +14,7 @@ class Player {
     Player();
     Player(const Hand &init_hand, string init_name);
     ~Player();
-    Hand get_hand();
+    Hand& get_hand();
     string get_name();
     void set_hand(const Hand &new_hand);
     void set_name(string new_name);

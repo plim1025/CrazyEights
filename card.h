@@ -13,6 +13,8 @@ class Card {
     ~Card();
     int get_rank();
     int get_suit();
+    string get_string_rank();
+    string get_string_suit();
     void set_rank(int new_rank);
     void set_suit(int new_suit);
     void reset_card();

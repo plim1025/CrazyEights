@@ -7,8 +7,12 @@
 
 Game::Game() {
     cards = Deck();
-    players[0] = Player();
-    players[1] = Player();
+    cards.fill_cards();
+    cards.shuffle_cards();
+    flip_top_card();
+    players[0] = Player(Hand(), "Human");
+    players[1] = Player(Hand(), "Computer");
+    player_turn = 0;
 }
 
 Game::Game(const Deck &init_cards, const Player (&init_players)[2]) {
@@ -18,10 +22,10 @@ Game::Game(const Deck &init_cards, const Player (&init_players)[2]) {
 }
 
 Game::~Game() {
-    cout << "Game destroyed" << endl;
+    cout << "Game over" << endl;
 };
 
-Deck Game::get_cards() {
+Deck& Game::get_cards() {
     return cards;
 }
 
@@ -52,13 +56,15 @@ bool Game::check_game_status() {
 }
 
 void Game::print_game_status() {
-    // Assuming human player is players[0]
-    Hand player_hand = players[0].get_hand();
-    Card *human_cards = player_hand.get_cards();
-    cout << "Your hand:" << endl;
-    player_hand.print_hand();
-    cout << endl << "Card on top of stockpile: " << "Rank: " << faceup_card.get_rank() << " Suit: " << faceup_card.get_suit() << endl;
-    cout << "Cards left in deck: " << cards.get_n_cards() << endl;
+    cout << endl << "Card on top of stockpile: Rank: " << faceup_card.get_string_rank() << ", Suit: " << faceup_card.get_string_suit() << endl;
+    cout << "Cards left in deck: " << cards.get_n_cards() << endl << endl;
+    if(player_turn == 0) {
+        // Assuming human player is players[0]
+        Hand player_hand = players[0].get_hand();
+        cout << "Your hand:" << endl;
+        player_hand.print_hand();
+    }
+
 }
 
 void Game::flip_top_card() {
@@ -72,3 +78,18 @@ void Game::flip_top_card() {
         }
     }
 }
+
+void Game::deal_cards() {
+    Hand &human_hand = players[0].get_hand();
+    cards.deal_card(human_hand, 7);
+    Hand &computer_hand = players[1].get_hand();
+    cards.deal_card(computer_hand, 7);
+}
+
+// void Game::start_turn() {
+//     cout <<
+// }
+
+// void Game::end_turn() {
+
+// }

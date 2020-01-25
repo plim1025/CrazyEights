@@ -20,7 +20,7 @@ Deck::Deck(const Card (&init_cards)[DECK_SIZE]) {
 }
 
 Deck::~Deck() {
-    cout << "Deck destroyed" << endl;
+    //cout << "Deck destroyed" << endl;
 }
 
 Card* Deck::get_cards() {
