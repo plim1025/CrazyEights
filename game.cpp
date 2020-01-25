@@ -19,8 +19,16 @@ Game::Game(Deck init_cards, Player init_players[2]) {
 
 Game::~Game() {};
 
+Deck Game::get_cards() {
+    return cards;
+}
+
 Player* Game::get_players() {
     return players;
+}
+
+Card Game::get_faceup_card() {
+    return faceup_card;
 }
 
 void Game::set_cards(Deck new_cards) {
@@ -32,6 +40,10 @@ void Game::set_players(Player new_players[2]) {
     players[1] = new_players[1];
 }
 
+void Game::set_faceup_card(Card new_faceup_card) {
+    faceup_card = new_faceup_card;
+}
+
 bool Game::check_game_status() {
     // This works since it will return 0 (false) if there are zero cards, else true
     return cards.get_n_cards();
@@ -40,13 +52,20 @@ bool Game::check_game_status() {
 void Game::print_game_status() {
     // Assuming human player is players[0]
     Hand player_hand = players[0].get_hand();
-    Card *human_cards = cards.get_cards();
+    Card *human_cards = player_hand.get_cards();
     cout << "Your hand:" << endl;
     player_hand.print_hand();
-    cout << endl << "Card on top of stockpile: ";
+    cout << endl << "Card on top of stockpile: " << "Rank: " << faceup_card.get_rank() << " Suit: " << faceup_card.get_suit() << endl;
+    cout << "Cards left in deck: " << cards.get_n_cards() << endl;
+}
+
+void Game::flip_top_card() {
+    Card* deck = cards.get_cards();
+    // Find first valid card in deck
     for(int i = 0; i < DECK_SIZE; i++) {
-        if(human_cards[i].is_valid_card()) {
-            cout << "Rank: " << human_cards[i].get_rank() << " Suit: " << human_cards[i].get_suit() << endl;
+        if(deck[i].is_valid_card()) {
+            faceup_card = deck[i];
+            deck[i].reset_card();
             break;
         }
     }

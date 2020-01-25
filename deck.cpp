@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "card.h"
 #include "deck.h"
 #include "hand.h"
@@ -42,18 +43,44 @@ void Deck::print_cards() {
         cout << cards[i].get_rank() << " " << cards[i].get_suit() << endl;
 }
 
-void Deck::deal_card(Hand hand) {
-    int card_index = 0;
-    // Find first non-empty card
-    for(int i = 0; i < DECK_SIZE; i++) {
-        if(cards[i].is_valid_card()) {
-            card_index = i;
-            break;
+void Deck::deal_card(Hand hand, int num_cards) {
+    for(int i = 0; i < num_cards; i++) {
+        int card_index = 0;
+        // Find first non-empty card
+        for(int i = 0; i < DECK_SIZE; i++) {
+            if(cards[i].is_valid_card()) {
+                card_index = i;
+                break;
+            }
+        }
+        // Add card to given hand
+        hand.add_card(cards[card_index]);
+        // Take first card off deck
+        cards[card_index].reset_card();
+        n_cards--;
+    }
+}
+
+void Deck::fill_cards() {
+    for(int i = 0; i < 13; i++) {
+        for(int j = 0; j < 4; j++) {
+            cards[(j*13)+i].set_rank(i);
+            cards[(j*13)+i].set_suit(j);
         }
     }
-    // Add card to given hand
-    hand.add_card(cards[card_index]);
-    // Take first card off deck
-    cards[card_index].reset_card();
-    n_cards--;
+    n_cards = DECK_SIZE;
+}
+
+void Deck::shuffle_cards() {
+    srand(time(NULL));
+    for(int i = DECK_SIZE - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        swap_card(&cards[i], &cards[j]);
+    }
+}
+
+void Deck::swap_card(Card *a, Card *b) {
+    Card temp = *a;
+    *a = *b;
+    *b = temp;
 }

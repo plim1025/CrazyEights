@@ -20,7 +20,10 @@ class Deck {
     void set_cards(Card *new_cards);
     void set_n_cards(int n_cards);
     void print_cards();
-    void deal_card(Hand hand);
+    void deal_card(Hand hand, int num_cards);
+    void fill_cards();
+    void shuffle_cards();
+    void swap_card(Card *a, Card *b);
 };
 
 #endif
