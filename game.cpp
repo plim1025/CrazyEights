@@ -11,13 +11,15 @@ Game::Game() {
     players[1] = Player();
 }
 
-Game::Game(Deck init_cards, Player init_players[2]) {
+Game::Game(const Deck &init_cards, const Player (&init_players)[2]) {
     cards = init_cards;
     players[0] = init_players[0];
     players[1] = init_players[1];
 }
 
-Game::~Game() {};
+Game::~Game() {
+    cout << "Game destroyed" << endl;
+};
 
 Deck Game::get_cards() {
     return cards;
@@ -31,16 +33,16 @@ Card Game::get_faceup_card() {
     return faceup_card;
 }
 
-void Game::set_cards(Deck new_cards) {
+void Game::set_cards(const Deck &new_cards) {
     cards = new_cards;
 }
 
-void Game::set_players(Player new_players[2]) {
+void Game::set_players(const Player (&new_players)[2]) {
     players[0] = new_players[0];
     players[1] = new_players[1];
 }
 
-void Game::set_faceup_card(Card new_faceup_card) {
+void Game::set_faceup_card(const Card &new_faceup_card) {
     faceup_card = new_faceup_card;
 }
 

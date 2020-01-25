@@ -13,14 +13,14 @@ class Deck {
     int n_cards;
   public:
     Deck();
-    Deck(Card init_cards[DECK_SIZE]);
+    Deck(const Card (&init_cards)[DECK_SIZE]);
     ~Deck();
     Card* get_cards();
     int get_n_cards();
-    void set_cards(Card *new_cards);
+    void set_cards(const Card *&new_cards);
     void set_n_cards(int n_cards);
     void print_cards();
-    void deal_card(Hand hand, int num_cards);
+    void deal_card(Hand &hand, int num_cards);
     void fill_cards();
     void shuffle_cards();
     void swap_card(Card *a, Card *b);

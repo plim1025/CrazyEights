@@ -1,3 +1,4 @@
+#include <iostream>
 #include "card.h"
 
 Card::Card() {
@@ -10,7 +11,9 @@ Card::Card(int init_rank, int init_suit) {
     suit = init_suit;
 }
 
-Card::~Card() {}
+Card::~Card() {
+    cout << "Card Destroyed" << endl;
+}
 
 int Card::get_rank() {
     return rank;

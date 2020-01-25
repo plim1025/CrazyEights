@@ -13,13 +13,15 @@ Deck::Deck() {
     n_cards = DECK_SIZE;
 }
 
-Deck::Deck(Card init_cards[DECK_SIZE]) {
+Deck::Deck(const Card (&init_cards)[DECK_SIZE]) {
     for(int i = 0; i < DECK_SIZE; i++)
         cards[i] = init_cards[i];
     n_cards = DECK_SIZE;
 }
 
-Deck::~Deck() {}
+Deck::~Deck() {
+    cout << "Deck destroyed" << endl;
+}
 
 Card* Deck::get_cards() {
     return cards;
@@ -29,7 +31,7 @@ int Deck::get_n_cards() {
     return n_cards;
 }
 
-void Deck::set_cards(Card* new_cards) {
+void Deck::set_cards(const Card *&new_cards) {
     for(int i = 0; i < DECK_SIZE; i++)
         cards[i] = new_cards[i];
 }
@@ -43,7 +45,7 @@ void Deck::print_cards() {
         cout << cards[i].get_rank() << " " << cards[i].get_suit() << endl;
 }
 
-void Deck::deal_card(Hand hand, int num_cards) {
+void Deck::deal_card(Hand &hand, int num_cards) {
     for(int i = 0; i < num_cards; i++) {
         int card_index = 0;
         // Find first non-empty card

@@ -9,12 +9,14 @@ Player::Player() {
     name = "";
 }
 
-Player::Player(Hand init_hand, string init_name) {
+Player::Player(const Hand &init_hand, string init_name) {
     hand = init_hand;
     name = init_name;
 }
 
-Player::~Player() {};
+Player::~Player() {
+    cout << "Player destroyed" << endl;
+};
 
 Hand Player::get_hand() {
     return hand;
@@ -24,7 +26,7 @@ string Player::get_name() {
     return name;
 }
 
-void Player::set_hand(Hand new_hand) {
+void Player::set_hand(const Hand &new_hand) {
     hand = new_hand;
 }
 
@@ -32,7 +34,7 @@ void Player::set_name(string new_name) {
     name = new_name;
 }
 
-void Player::add_card(Card new_card) {
+void Player::add_card(const Card &new_card) {
     hand.add_card(new_card);
 }
 

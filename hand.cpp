@@ -7,7 +7,7 @@ Hand::Hand() {
     n_cards = 0;
 }
 
-Hand::Hand(Card *init_cards, int init_n_cards) {
+Hand::Hand(Card *&init_cards, int init_n_cards) {
     cards = new Card[init_n_cards];
     for(int i = 0; i < init_n_cards; i++) {
         cards[i].set_rank(init_cards[i].get_rank());
@@ -16,7 +16,9 @@ Hand::Hand(Card *init_cards, int init_n_cards) {
     n_cards = init_n_cards;
 }
 
-Hand::~Hand() {}
+Hand::~Hand() {
+    cout << "Hand destroyed" << endl;
+}
 
 Card* Hand::get_cards() {
     return cards;
@@ -26,7 +28,7 @@ int Hand::get_n_cards() {
     return n_cards;
 }
 
-void Hand::set_cards(Card *new_cards) {
+void Hand::set_cards(const Card *&new_cards) {
     for(int i = 0; i < n_cards; i++)
         cards[i] = new_cards[i];
 }
@@ -35,7 +37,7 @@ void Hand::set_n_cards(int new_n_cards) {
     n_cards = new_n_cards;
 }
 
-void Hand::add_card(Card new_card) {
+void Hand::add_card(const Card &new_card) {
     // Create new array 1 size bigger
     Card *new_cards = new Card[n_cards + 1];
     // Copy over values to new array from old
