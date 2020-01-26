@@ -111,7 +111,7 @@ void Game::flip_top_card() {
 void Game::deal_cards() {
     Hand &human_hand = players[0].get_hand();
     cards.deal_card(human_hand, 7);
-    cout << "Dealt 7 cards to human" << endl;
+    cout << endl << "Dealt 7 cards to human" << endl;
     Hand &computer_hand = players[1].get_hand();
     cards.deal_card(computer_hand, 7);
     cout << "Dealt 7 cards to computer" << endl;
