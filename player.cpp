@@ -50,3 +50,30 @@ bool Player::check_hand(int rank, int suit) {
     }
     return false;
 }
+
+int Player::ask_suit() {
+    srand(time(NULL));
+    string suit;
+    cout << "Since " << name << " played an eight, " << name << " may now choose a suit that the following player must play." << endl;
+    if(name == "You") {
+        while(suit != "1" && suit != "2" && suit != "3" && suit != "4") {
+            cout << "Select one of the following: (1) Club, (2) Diamond (3) Heart (4): Spade: ";
+            getline(cin, suit);
+        }
+    } else if(name == "Computer") {
+        int suit_num = (rand() % 4);
+        switch(suit_num) {
+            case 0:
+                cout << "Computer selected Clubs" << endl; break;
+            case 1:
+                cout << "Computer selected Diamond" << endl; break;
+            case 2:
+                cout << "Computer selected Heart" << endl; break;
+            case 3:
+                cout << "Computer selected Spade" << endl;
+        }
+        return suit_num;
+    }
+
+    return atoi(suit.c_str()) - 1;
+}

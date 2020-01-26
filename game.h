@@ -20,7 +20,6 @@ class Game {
     void set_cards(const Deck &new_cards);
     void set_players(const Player (&new_players)[2]);
     void set_faceup_card(Card &new_faceup_card);
-    void reset_faceup_card();
     bool game_over();
     void print_game_status();
     void flip_top_card();

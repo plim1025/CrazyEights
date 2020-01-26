@@ -11,7 +11,7 @@ Game::Game() {
     cards.fill_cards();
     cards.shuffle_cards();
     flip_top_card();
-    players[0] = Player(Hand(), "Human");
+    players[0] = Player(Hand(), "You");
     players[1] = Player(Hand(), "Computer");
     player_turn = 0;
 }
@@ -56,12 +56,6 @@ void Game::set_faceup_card(Card &new_faceup_card) {
     faceup_card.set_suit(new_faceup_card.get_suit());
 }
 
-void Game::reset_faceup_card() {
-    for(int i = 0; i < DECK_SIZE; i++) {
-        if(cards.get_cards()[i].is_valid_card())
-            set_faceup_card(cards.get_cards()[i]);
-    }
-}
 
 bool Game::game_over() {
     int deck_cards_left = cards.get_n_cards();
@@ -70,21 +64,29 @@ bool Game::game_over() {
     if(deck_cards_left == 0) {
         if(player1_cards > player0_cards)
             cout << "You win :D" << endl;
-        else
+        else if(player1_cards < player0_cards)
             cout << "You lose D:" << endl;
+        else
+            cout << "Tie game 0_0" << endl;
         return true;
     } else if (player0_cards == 0) {
         cout << "You win :D" << endl;
         return true;
     } else if (player1_cards == 0) {
         cout << "You lose D:" << endl;
-    } else if(player1_cards == 0)
+        return true;
+    } else
         return false;
 }
 
 void Game::print_game_status() {
     cout << endl << "Cards left in deck: " << cards.get_n_cards() << endl;
-    cout << "Card on top of stockpile: Rank: " << faceup_card.get_string_rank() << ", Suit: " << faceup_card.get_string_suit() << endl;
+    string faceup_rank = "";
+    if(faceup_card.get_rank() == -1)
+        faceup_rank = "any";
+    else
+        faceup_rank = faceup_card.get_string_rank();
+    cout << "Card on top of stockpile: Rank: " << faceup_rank << ", Suit: " << faceup_card.get_string_suit() << endl;
     if(player_turn == 0) {
         // Assuming human player is players[0]
         Hand &player_hand = players[0].get_hand();
@@ -121,10 +123,9 @@ void Game::start_turn() {
     // If player has no cards that match faceup one, draw a card
     if(!players[player_turn].check_hand(faceup_card.get_rank(), faceup_card.get_suit())) {
         string player = (player_turn == 0 ? "you" : "computer");
-        cout << "No possible cards in hand, " << player << " draw one card." << endl << endl;
+        cout << "No possible cards in hand, " << player << " draw one card." << endl;
         Hand &hand = players[player_turn].get_hand();
         cards.deal_card(hand, 1);
-        reset_faceup_card();
     } else {
         if(player_turn == 0)
             card_num = get_card_num();
@@ -184,12 +185,16 @@ void Game::end_turn() {
 void Game::place_card(int card_num) {
     Hand &hand = players[player_turn].get_hand();
     Card *&cards = hand.get_cards();
-
     int rank = cards[card_num].get_rank();
     int suit = cards[card_num].get_suit();
     string player = (player_turn == 0 ? "You" : "Computer");
     cout << player << " placed card with Rank " << cards[card_num].get_string_rank() << " and Suit " << cards[card_num].get_string_suit() << endl;
-    hand.remove_card(rank, suit);
     faceup_card.set_rank(rank);
     faceup_card.set_suit(suit);
+    hand.remove_card(rank, suit);
+    if(rank == 8) {
+        int next_suit = players[player_turn].ask_suit();
+        faceup_card.set_rank(-1);
+        faceup_card.set_suit(next_suit);
+    }
 }
