@@ -3,7 +3,7 @@
 #include "hand.h"
 
 Hand::Hand() {
-    cards = nullptr;
+    cards = NULL;
     n_cards = 0;
 }
 
