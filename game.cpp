@@ -67,9 +67,18 @@ bool Game::game_over() {
     int deck_cards_left = cards.get_n_cards();
     int player0_cards = players[0].get_hand().get_n_cards();
     int player1_cards = players[1].get_hand().get_n_cards();
-    if(deck_cards_left == 0 || player0_cards == 0 || player1_cards == 0)
+    if(deck_cards_left == 0) {
+        if(player1_cards > player0_cards)
+            cout << "You win :D" << endl;
+        else
+            cout << "You lose D:" << endl;
         return true;
-    else
+    } else if (player0_cards == 0) {
+        cout << "You win :D" << endl;
+        return true;
+    } else if (player1_cards == 0) {
+        cout << "You lose D:" << endl;
+    } else if(player1_cards == 0)
         return false;
 }
 

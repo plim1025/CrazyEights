@@ -110,7 +110,7 @@ int Hand::get_rank(int index) {
 
 void Hand::print_hand() {
     cout << endl << "Your hand: " << endl;
-    cout << endl << "Number of cards: " << n_cards << endl;
+    cout << "Number of cards: " << n_cards << endl;
     for(int i = 0; i < n_cards; i++)
         cout << "(" << i+1 << ") " << "Rank: " << cards[i].get_string_rank() << ", " << "Suit: " << cards[i].get_string_suit() << endl;
     cout << endl;
