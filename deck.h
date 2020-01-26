@@ -23,7 +23,7 @@ class Deck {
     void deal_card(Hand &hand, int num_cards);
     void fill_cards();
     void shuffle_cards();
-    void swap_card(Card *a, Card *b);
+    void swap_cards(Card *a, Card *b);
 };
 
 #endif

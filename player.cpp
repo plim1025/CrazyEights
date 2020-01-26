@@ -43,19 +43,10 @@ void Player::remove_card(int rank, int suit) {
 }
 
 bool Player::check_hand(int rank, int suit) {
-    Card *cards = hand.get_cards();
+    Card *&cards = hand.get_cards();
     for(int i = 0; i < hand.get_n_cards(); i++) {
-        if(cards[i].get_rank() == rank && cards[i].get_suit() == suit)
+        if(cards[i].get_rank() == rank || cards[i].get_suit() == suit)
             return true;
     }
     return false;
-}
-
-int Player::ask_suit() {
-    string suit = "";
-    while(suit != "1" && suit != "2" && suit != "3" && suit != "4") {
-        cout << "Which suit do you want the computer to place? Club - 1, Diamond - 2, Hearts - 3, Spades - 4: ";
-        getline(cin, suit);
-    }
-    return atoi(suit.c_str());
 }

@@ -15,20 +15,22 @@ class Game {
     ~Game();
     Deck& get_cards();
     Player* get_players();
-    Card get_faceup_card();
+    Card& get_faceup_card();
+    int get_player_turn();
     void set_cards(const Deck &new_cards);
     void set_players(const Player (&new_players)[2]);
-    void set_faceup_card(const Card &new_faceup_card);
+    void set_faceup_card(Card &new_faceup_card);
+    void reset_faceup_card();
     bool game_over();
     void print_game_status();
     void flip_top_card();
     void deal_cards();
     void start_turn();
     bool card_is_valid(int card_num);
-    bool no_possible_card();
     void end_turn();
     void place_card(int card_num);
     int get_card_num();
+    int get_random_card_num();
 };
 
 #endif

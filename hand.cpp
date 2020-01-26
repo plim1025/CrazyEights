@@ -87,7 +87,7 @@ void Hand::remove_card(int rank, int suit) {
     // Delete old array
     Card **cards_ptr = &cards;
     delete [] *cards_ptr;
-    *cards_ptr = NULL;
+    //*cards_ptr = NULL;
     // Make member variable point to new array
     cards = new_cards;
     // Lower number of cards in hand
@@ -103,7 +103,9 @@ int Hand::get_rank(int index) {
 }
 
 void Hand::print_hand() {
-    cout << "Number of cards: " << n_cards << endl;
+    cout << endl << "Your hand: " << endl;
+    cout << endl << "Number of cards: " << n_cards << endl;
     for(int i = 0; i < n_cards; i++)
         cout << "(" << i+1 << ") " << "Rank: " << cards[i].get_string_rank() << ", " << "Suit: " << cards[i].get_string_suit() << endl;
+    cout << endl;
 }

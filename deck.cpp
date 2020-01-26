@@ -77,11 +77,11 @@ void Deck::shuffle_cards() {
     srand(time(NULL));
     for(int i = DECK_SIZE - 1; i > 0; i--) {
         int j = rand() % (i + 1);
-        swap_card(&cards[i], &cards[j]);
+        swap_cards(&cards[i], &cards[j]);
     }
 }
 
-void Deck::swap_card(Card *a, Card *b) {
+void Deck::swap_cards(Card *a, Card *b) {
     Card temp = *a;
     *a = *b;
     *b = temp;

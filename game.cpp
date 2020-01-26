@@ -33,8 +33,12 @@ Player* Game::get_players() {
     return players;
 }
 
-Card Game::get_faceup_card() {
+Card& Game::get_faceup_card() {
     return faceup_card;
+}
+
+int Game::get_player_turn() {
+    return player_turn;
 }
 
 void Game::set_cards(const Deck &new_cards) {
@@ -46,8 +50,16 @@ void Game::set_players(const Player (&new_players)[2]) {
     players[1] = new_players[1];
 }
 
-void Game::set_faceup_card(const Card &new_faceup_card) {
-    faceup_card = new_faceup_card;
+void Game::set_faceup_card(Card &new_faceup_card) {
+    faceup_card.set_rank(new_faceup_card.get_rank());
+    faceup_card.set_suit(new_faceup_card.get_suit());
+}
+
+void Game::reset_faceup_card() {
+    for(int i = 0; i < DECK_SIZE; i++) {
+        if(cards.get_cards()[i].is_valid_card())
+            set_faceup_card(cards.get_cards()[i]);
+    }
 }
 
 bool Game::game_over() {
@@ -60,8 +72,7 @@ void Game::print_game_status() {
     cout << "Card on top of stockpile: Rank: " << faceup_card.get_string_rank() << ", Suit: " << faceup_card.get_string_suit() << endl;
     if(player_turn == 0) {
         // Assuming human player is players[0]
-        Hand player_hand = players[0].get_hand();
-        cout << "Your hand:" << endl;
+        Hand &player_hand = players[0].get_hand();
         player_hand.print_hand();
     }
 }
@@ -81,22 +92,30 @@ void Game::flip_top_card() {
 void Game::deal_cards() {
     Hand &human_hand = players[0].get_hand();
     cards.deal_card(human_hand, 7);
+    cout << "Dealt 7 cards to human" << endl;
     Hand &computer_hand = players[1].get_hand();
     cards.deal_card(computer_hand, 7);
+    cout << "Dealt 7 cards to computer" << endl;
 }
 
 void Game::start_turn() {
     string card_string = "";
     int card_num = 0;
-    if(no_possible_card()) {
-        string player = (player_turn == 0 ? "human (you)" : "computer");
-        cout << "No possible cards in hand, " << player << " draws one card." << endl << endl;
+    // If player has no cards that match faceup one, draw a card
+    if(!players[player_turn].check_hand(faceup_card.get_rank(), faceup_card.get_suit())) {
+        string player = (player_turn == 0 ? "you" : "computer");
+        cout << "No possible cards in hand, " << player << " draw one card." << endl << endl;
         Hand &hand = players[player_turn].get_hand();
         cards.deal_card(hand, 1);
+        reset_faceup_card();
     } else {
-        get_card_num();
+        if(player_turn == 0)
+            card_num = get_card_num();
+        else
+            card_num = get_random_card_num();
         place_card(card_num);
     }
+    end_turn();
 }
 
 int Game::get_card_num() {
@@ -106,12 +125,22 @@ int Game::get_card_num() {
         cout << "Enter the number for the card you want to place: ";
         getline(cin, card_string);
         card_num = atoi(card_string.c_str()) - 1;
+        // If card does not match faceup card or if number given is out of range, ask again
         if(!card_is_valid(card_num))
             cout << "Invalid card number. Please enter a card with either rank " << faceup_card.get_string_rank() << " or suit " << faceup_card.get_string_suit() << endl;
         else
             break;
     }
     return card_num;
+}
+
+int Game::get_random_card_num() {
+    int card_num = 0;
+    while(true) {
+        if(card_is_valid(card_num))
+            return card_num;
+        card_num++;
+    }
 }
 
 bool Game::card_is_valid(int card_num) {
@@ -135,22 +164,16 @@ void Game::end_turn() {
         player_turn = 0;
 }
 
-bool Game::no_possible_card() {
-    Hand &hand = players[player_turn].get_hand();
-    for(int i = 0; i < hand.get_n_cards(); i++) {
-        if(card_is_valid(i)) {
-            return false;
-        }
-    }
-    return true;
-}
-
 void Game::place_card(int card_num) {
     Hand &hand = players[player_turn].get_hand();
     Card *&cards = hand.get_cards();
+
     int rank = cards[card_num].get_rank();
     int suit = cards[card_num].get_suit();
+    string player = (player_turn == 0 ? "You" : "Computer");
+    cout << player << " placed card with rank " << cards[card_num].get_string_rank() << " and suit " << cards[card_num].get_string_suit() << endl;
     hand.remove_card(rank, suit);
     faceup_card.set_rank(rank);
     faceup_card.set_suit(suit);
+
 }
