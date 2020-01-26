@@ -12,8 +12,12 @@ using namespace std;
 int main() {
     Game game = Game();
     game.deal_cards();
-    // game.start_turn();
     game.print_game_status();
+    // while(!game.game_over()) {
+        game.start_turn();
+        game.print_game_status();
+    // }
+
 
     return 0;
 }

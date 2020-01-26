@@ -13,7 +13,7 @@ class Hand {
     Hand();
     Hand(Card *&init_cards, int init_n_cards);
     ~Hand();
-    Card* get_cards();
+    Card*& get_cards();
     int get_n_cards();
     void set_cards(const Card *&new_cards);
     void set_n_cards(int new_n_cards);

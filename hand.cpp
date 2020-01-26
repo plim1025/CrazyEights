@@ -17,11 +17,13 @@ Hand::Hand(Card *&init_cards, int init_n_cards) {
 }
 
 Hand::~Hand() {
-    // cout << "Hand destroyed" << endl;
-    delete [] cards;
+    //cout << "Hand destroyed" << endl;
+    Card **cards_ptr = &cards;
+    delete [] *cards_ptr;
+    *cards_ptr = NULL;
 }
 
-Card* Hand::get_cards() {
+Card*& Hand::get_cards() {
     return cards;
 }
 
@@ -47,7 +49,9 @@ void Hand::add_card(const Card &new_card) {
     // Add new card to new array
     new_cards[n_cards] = new_card;
     // Delete old array
-    delete [] cards;
+    Card **cards_ptr = &cards;
+    delete [] *cards_ptr;
+    *cards_ptr = NULL;
     // Make member variable point to new array
     cards = new_cards;
     // Increase number of cards
@@ -81,7 +85,9 @@ void Hand::remove_card(int rank, int suit) {
         card_index++;
     }
     // Delete old array
-    delete [] cards;
+    Card **cards_ptr = &cards;
+    delete [] *cards_ptr;
+    *cards_ptr = NULL;
     // Make member variable point to new array
     cards = new_cards;
     // Lower number of cards in hand
@@ -99,5 +105,5 @@ int Hand::get_rank(int index) {
 void Hand::print_hand() {
     cout << "Number of cards: " << n_cards << endl;
     for(int i = 0; i < n_cards; i++)
-        cout << "(" << i << ") " << "Rank: " << cards[i].get_rank() << " " << "Suit: " << cards[i].get_suit() << endl;
+        cout << "(" << i+1 << ") " << "Rank: " << cards[i].get_string_rank() << ", " << "Suit: " << cards[i].get_string_suit() << endl;
 }
