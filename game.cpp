@@ -64,8 +64,13 @@ void Game::reset_faceup_card() {
 }
 
 bool Game::game_over() {
-    // This works since it will return 0 (false) if there are zero cards, else true
-    return !cards.get_n_cards();
+    int deck_cards_left = cards.get_n_cards();
+    int player0_cards = players[0].get_hand().get_n_cards();
+    int player1_cards = players[1].get_hand().get_n_cards();
+    if(deck_cards_left == 0 || player0_cards == 0 || player1_cards == 0)
+        return true;
+    else
+        return false;
 }
 
 void Game::print_game_status() {
@@ -75,6 +80,8 @@ void Game::print_game_status() {
         // Assuming human player is players[0]
         Hand &player_hand = players[0].get_hand();
         player_hand.print_hand();
+    } else if (player_turn == 1) {
+        cout << endl <<"Computer has " << players[1].get_hand().get_n_cards() << " cards left" << endl;
     }
 }
 
@@ -172,9 +179,8 @@ void Game::place_card(int card_num) {
     int rank = cards[card_num].get_rank();
     int suit = cards[card_num].get_suit();
     string player = (player_turn == 0 ? "You" : "Computer");
-    cout << player << " placed card with rank " << cards[card_num].get_string_rank() << " and suit " << cards[card_num].get_string_suit() << endl;
+    cout << player << " placed card with Rank " << cards[card_num].get_string_rank() << " and Suit " << cards[card_num].get_string_suit() << endl;
     hand.remove_card(rank, suit);
     faceup_card.set_rank(rank);
     faceup_card.set_suit(suit);
-
 }

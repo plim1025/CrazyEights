@@ -40,25 +40,32 @@ void Hand::set_n_cards(int new_n_cards) {
     n_cards = new_n_cards;
 }
 
-void Hand::add_card(const Card &new_card) {
+void Hand::add_card(Card &new_card) {
+    Card **cards_ptr = &cards;
     // Create new array 1 size bigger
     Card *new_cards = new Card[n_cards + 1];
     // Copy over values to new array from old
-    for(int i = 0; i < n_cards; i++)
-        new_cards[i] = cards[i];
+    for(int i = 0; i < n_cards; i++) {
+        new_cards[i].set_rank((*cards_ptr)[i].get_rank());
+        new_cards[i].set_suit((*cards_ptr)[i].get_suit());
+    }
     // Add new card to new array
-    new_cards[n_cards] = new_card;
+    new_cards[n_cards].set_rank(new_card.get_rank());
+    new_cards[n_cards].set_suit(new_card.get_suit());
     // Delete old array
-    Card **cards_ptr = &cards;
     delete [] *cards_ptr;
     *cards_ptr = NULL;
     // Make member variable point to new array
-    cards = new_cards;
+    *cards_ptr = new_cards;
     // Increase number of cards
     n_cards++;
 }
 
 void Hand::remove_card(int rank, int suit) {
+    Card **cards_ptr = &cards;
+    // Create new array 1 size smaller
+    Card *new_cards = new Card[n_cards - 1];
+
     // Find card that user want to remove and set it to null
     bool card_reset = false;
     for(int i = 0; i < n_cards; i++) {
@@ -72,24 +79,23 @@ void Hand::remove_card(int rank, int suit) {
         cout << "Card not found" << endl;
         return;
     }
-    // Create new array 1 size smaller
-    Card *new_cards = new Card[n_cards - 1];
     // Copy over values to new array from old - check if null and skip if is
     int cards_copied = 0;
     int card_index = 0;
-    while(card_index <= n_cards) {
+    while(card_index < n_cards) {
         if(cards[card_index].is_valid_card()) {
-            new_cards[cards_copied] = cards[card_index];
+            new_cards[cards_copied].set_rank((*cards_ptr)[card_index].get_rank());
+            new_cards[cards_copied].set_suit((*cards_ptr)[card_index].get_suit());
             cards_copied++;
         }
         card_index++;
     }
+
     // Delete old array
-    Card **cards_ptr = &cards;
     delete [] *cards_ptr;
-    //*cards_ptr = NULL;
+    *cards_ptr = NULL;
     // Make member variable point to new array
-    cards = new_cards;
+    *cards_ptr = new_cards;
     // Lower number of cards in hand
     n_cards--;
 }

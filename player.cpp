@@ -34,7 +34,7 @@ void Player::set_name(string new_name) {
     name = new_name;
 }
 
-void Player::add_card(const Card &new_card) {
+void Player::add_card(Card &new_card) {
     hand.add_card(new_card);
 }
 

@@ -17,7 +17,7 @@ class Hand {
     int get_n_cards();
     void set_cards(const Card *&new_cards);
     void set_n_cards(int new_n_cards);
-    void add_card(const Card &new_card);
+    void add_card(Card &new_card);
     void remove_card(int rank, int suit);
     int get_suit(int index);
     int get_rank(int index);
