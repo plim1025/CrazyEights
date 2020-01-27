@@ -2,11 +2,25 @@
 #include "card.h"
 #include "hand.h"
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Hand::Hand() {
     cards = NULL;
     n_cards = 0;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Hand::Hand(Card *&init_cards, int init_n_cards) {
     cards = new Card[init_n_cards];
     for(int i = 0; i < init_n_cards; i++) {
@@ -16,6 +30,13 @@ Hand::Hand(Card *&init_cards, int init_n_cards) {
     n_cards = init_n_cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Hand::~Hand() {
     //cout << "Hand destroyed" << endl;
     Card **cards_ptr = &cards;
@@ -23,23 +44,58 @@ Hand::~Hand() {
     *cards_ptr = NULL;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Card*& Hand::get_cards() {
     return cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Hand::get_n_cards() {
     return n_cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Hand::set_cards(const Card *&new_cards) {
     for(int i = 0; i < n_cards; i++)
         cards[i] = new_cards[i];
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Hand::set_n_cards(int new_n_cards) {
     n_cards = new_n_cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Hand::add_card(Card &new_card) {
     Card **cards_ptr = &cards;
     // Create new array 1 size bigger
@@ -61,6 +117,13 @@ void Hand::add_card(Card &new_card) {
     n_cards++;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Hand::remove_card(int rank, int suit) {
     Card **cards_ptr = &cards;
     // Create new array 1 size smaller
@@ -100,14 +163,35 @@ void Hand::remove_card(int rank, int suit) {
     n_cards--;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Hand::get_suit(int index) {
     return cards[index].get_suit();
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Hand::get_rank(int index) {
     return cards[index].get_rank();
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Hand::print_hand() {
     cout << endl << "Your hand: " << endl;
     cout << "Number of cards: " << n_cards << endl;

@@ -6,6 +6,13 @@
 #include "game.h"
 #define DECK_SIZE 52
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Game::Game() {
     cards = Deck();
     cards.fill_cards();
@@ -16,47 +23,116 @@ Game::Game() {
     player_turn = 0;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Game::Game(const Deck &init_cards, const Player (&init_players)[2]) {
     cards = init_cards;
     players[0] = init_players[0];
     players[1] = init_players[1];
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Game::~Game() {
     cout << "Game over" << endl;
 };
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Deck& Game::get_cards() {
     return cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Player* Game::get_players() {
     return players;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Card& Game::get_faceup_card() {
     return faceup_card;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Game::get_player_turn() {
     return player_turn;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::set_cards(const Deck &new_cards) {
     cards = new_cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::set_players(const Player (&new_players)[2]) {
     players[0] = new_players[0];
     players[1] = new_players[1];
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::set_faceup_card(Card &new_faceup_card) {
     faceup_card.set_rank(new_faceup_card.get_rank());
     faceup_card.set_suit(new_faceup_card.get_suit());
 }
 
-
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 bool Game::game_over() {
     int deck_cards_left = cards.get_n_cards();
     int player0_cards = players[0].get_hand().get_n_cards();
@@ -79,6 +155,13 @@ bool Game::game_over() {
         return false;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::print_game_status() {
     cout << endl << "Cards left in deck: " << cards.get_n_cards() << endl;
     string faceup_rank = "";
@@ -96,6 +179,13 @@ void Game::print_game_status() {
     }
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::flip_top_card() {
     Card* deck = cards.get_cards();
     // Find first valid card in deck
@@ -108,6 +198,13 @@ void Game::flip_top_card() {
     }
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::deal_cards() {
     Hand &human_hand = players[0].get_hand();
     cards.deal_card(human_hand, 7);
@@ -117,6 +214,13 @@ void Game::deal_cards() {
     cout << "Dealt 7 cards to computer" << endl;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::start_turn() {
     string card_string = "";
     int card_num = 0;
@@ -136,6 +240,13 @@ void Game::start_turn() {
     end_turn();
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Game::get_card_num() {
     string card_string = "";
     int card_num = 0;
@@ -152,6 +263,13 @@ int Game::get_card_num() {
     return card_num;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Game::get_random_card_num() {
     int card_num = 0;
     while(true) {
@@ -161,6 +279,13 @@ int Game::get_random_card_num() {
     }
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 bool Game::card_is_valid(int card_num) {
     Hand &hand = players[player_turn].get_hand();
     if(card_num < 0 || card_num > (hand.get_n_cards() - 1))
@@ -175,6 +300,13 @@ bool Game::card_is_valid(int card_num) {
         return false;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::end_turn() {
     if(player_turn == 0)
         player_turn = 1;
@@ -182,6 +314,13 @@ void Game::end_turn() {
         player_turn = 0;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Game::place_card(int card_num) {
     Hand &hand = players[player_turn].get_hand();
     Card *&cards = hand.get_cards();

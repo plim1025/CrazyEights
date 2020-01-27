@@ -1,28 +1,70 @@
 #include <iostream>
 #include "card.h"
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Card::Card() {
     rank = 0;
     suit = 0;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Card::Card(int init_rank, int init_suit) {
     rank = init_rank;
     suit = init_suit;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Card::~Card() {
     //cout << "Card Destroyed" << endl;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Card::get_rank() {
     return rank;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Card::get_suit() {
     return suit;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 string Card::get_string_rank() {
     switch(rank) {
         case 0:
@@ -54,6 +96,13 @@ string Card::get_string_rank() {
     }
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 string Card::get_string_suit() {
     switch(suit) {
         case 0:
@@ -67,19 +116,47 @@ string Card::get_string_suit() {
     }
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Card::set_rank(int new_rank) {
     rank = new_rank;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Card::set_suit(int new_suit) {
     suit = new_suit;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Card::reset_card() {
     rank = -1;
     suit = -1;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 bool Card::is_valid_card() {
     return !(rank == -1 || suit == -1);
 }

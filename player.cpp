@@ -4,40 +4,103 @@
 #include "hand.h"
 #include "player.h"
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Player::Player() {
     hand = Hand();
     name = "";
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Player::Player(const Hand &init_hand, string init_name) {
     hand = init_hand;
     name = init_name;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Player::~Player() {
     // cout << "Player destroyed" << endl;
-};
+}
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Hand& Player::get_hand() {
     return hand;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 string Player::get_name() {
     return name;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Player::set_hand(const Hand &new_hand) {
     hand = new_hand;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Player::set_name(string new_name) {
     name = new_name;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Player::add_card(Card &new_card) {
     hand.add_card(new_card);
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Player::remove_card(int rank, int suit) {
     hand.remove_card(rank, suit);
 }

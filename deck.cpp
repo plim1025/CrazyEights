@@ -5,6 +5,13 @@
 #include "hand.h"
 #define DECK_SIZE 52
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Deck::Deck() {
     for(int i = 0; i < DECK_SIZE; i++) {
         Card new_card = Card();
@@ -13,38 +20,94 @@ Deck::Deck() {
     n_cards = DECK_SIZE;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Deck::Deck(const Card (&init_cards)[DECK_SIZE]) {
     for(int i = 0; i < DECK_SIZE; i++)
         cards[i] = init_cards[i];
     n_cards = DECK_SIZE;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Deck::~Deck() {
     //cout << "Deck destroyed" << endl;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 Card* Deck::get_cards() {
     return cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Deck::get_n_cards() {
     return n_cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Deck::set_cards(const Card *&new_cards) {
     for(int i = 0; i < DECK_SIZE; i++)
         cards[i] = new_cards[i];
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Deck::set_n_cards(int new_n_cards) {
     n_cards = new_n_cards;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Deck::print_cards() {
     for(int i = 0; i < DECK_SIZE; i++)
         cout << cards[i].get_rank() << " " << cards[i].get_suit() << endl;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Deck::deal_card(Hand &hand, int num_cards) {
     for(int i = 0; i < num_cards; i++) {
         int card_index = 0;
@@ -63,6 +126,13 @@ void Deck::deal_card(Hand &hand, int num_cards) {
     }
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Deck::fill_cards() {
     for(int i = 0; i < 13; i++) {
         for(int j = 0; j < 4; j++) {
@@ -73,6 +143,13 @@ void Deck::fill_cards() {
     n_cards = DECK_SIZE;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Deck::shuffle_cards() {
     srand(time(NULL));
     for(int i = DECK_SIZE - 1; i > 0; i--) {
@@ -81,6 +158,13 @@ void Deck::shuffle_cards() {
     }
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 void Deck::swap_cards(Card *a, Card *b) {
     Card temp = *a;
     *a = *b;
