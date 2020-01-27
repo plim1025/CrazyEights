@@ -105,6 +105,13 @@ void Player::remove_card(int rank, int suit) {
     hand.remove_card(rank, suit);
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 bool Player::check_hand(int rank, int suit) {
     Card *&cards = hand.get_cards();
     for(int i = 0; i < hand.get_n_cards(); i++) {
@@ -114,6 +121,13 @@ bool Player::check_hand(int rank, int suit) {
     return false;
 }
 
+/*
+ ** Function: Card
+ ** Description: Constructor for card
+ ** Parameters: n/a
+ ** Pre-conditions: n/a
+ ** Post-conditions: set rank and suit to zero
+*/
 int Player::ask_suit() {
     srand(time(NULL));
     string suit;
