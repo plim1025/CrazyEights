@@ -1,3 +1,12 @@
+/*
+** Program: CrazyEights
+** Author: Paul Lim
+** Date: 1/27/2020
+** Description: a game that deals cards to players and whoever has the least cards at the end wins
+** Input: none
+** Output: winner of game
+*/
+
 #include <iostream>
 #include "card.h"
 #include "deck.h"
